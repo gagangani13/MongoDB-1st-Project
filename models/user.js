@@ -36,6 +36,11 @@ userSchema.methods.addToCart = function (product) {
   return this.save();
 };
 
+userSchema.methods.deleteCartItem = function (prodId) {
+  const newCart = this.cart.filter((i) => i.productId.toString() !== prodId);
+  return this.updateOne({ cart: newCart });
+};
+
 //----populate is best solution----
 // userSchema.methods.getCart = function () {
 //   const prodIds = this.cart.map((i) => i.productId);
